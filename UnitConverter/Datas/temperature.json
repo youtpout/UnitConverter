@@ -1,0 +1,22 @@
+[
+  {
+    "BaseUnit": true,
+    "Name": "Celsius",
+    "Sign": "°C",
+    "Ratio": 1
+  },
+  {
+    "BaseUnit": false,
+    "Name": "Kelvin",
+    "Sign": "K",
+    "Ratio": 1,
+    "Add": 273.15
+  },
+  {
+    "BaseUnit": false,
+    "Name": "Celsius",
+    "Sign": "°F",
+    "Ratio": 1.8,
+    "Add": 32
+  }
+]

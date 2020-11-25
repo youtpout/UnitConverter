@@ -1,0 +1,14 @@
+﻿<Application x:Class="UnitConverter.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:UnitConverter"
+             xmlns:vm="clr-namespace:UnitConverter.ViewModels"
+             StartupUri="Views/HomeView.xaml">
+    <Application.Resources>
+        <DataTemplate x:Key="UnitComboTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding ShowName}" />
+            </StackPanel>
+        </DataTemplate>
+    </Application.Resources>
+</Application>
