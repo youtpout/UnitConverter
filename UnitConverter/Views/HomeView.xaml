@@ -15,12 +15,12 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListView ItemsSource="{Binding UnitByDomain}" >
+        <ListView ItemsSource="{Binding MenuItems}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
-                    <Hyperlink  >
-                        <TextBlock Text="{Binding Path=Key}"/>
+                    <Hyperlink Command="{Binding DataContext.MenuSelectedCommand,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Grid}}}" CommandParameter="{Binding}" >
+                        <TextBlock Text="{Binding}"/>
                     </Hyperlink>
                         </TextBlock>
                 </DataTemplate>

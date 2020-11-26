@@ -1,11 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitConverter.Helpers;
 using UnitConverter.Models;
 
 namespace UnitConverter.ViewModels
@@ -71,15 +73,28 @@ namespace UnitConverter.ViewModels
             set { SetProperty(ref toValue, value); }
         }
 
-       // public Command ShareCommand { get; set; }
+        public List<string> MenuItems { get; set; }
+
+        public Command<string> MenuSelectedCommand { get; set; }
 
         public HomeViewModel()
         {
+            MenuSelectedCommand = new Command<string>(ChangeList);
+            MenuItems = new List<string>();
             UnitByDomain = GetUnits();
-            SelectedUnitList = UnitByDomain.First().Value;
-            FromUnit = SelectedUnitList.First();
-            ToUnit = SelectedUnitList.First();
+            if (UnitByDomain?.Count > 0)
+            {
+                MenuItems = UnitByDomain.Keys.ToList();
+                ChangeList(UnitByDomain.First().Key);
+            }
 
+        }
+
+        private void ChangeList(string key)
+        {
+            SelectedUnitList = UnitByDomain[key];
+            FromUnit = SelectedUnitList.FirstOrDefault();
+            ToUnit = SelectedUnitList.FirstOrDefault();
         }
 
 
