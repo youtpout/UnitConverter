@@ -1,16 +1,16 @@
 # UnitConverter
 Universal Unit Converter
 
-An universal unit converter fully configurable.
+A universal unit converter fully customizable.
 
 # Architecture
-Base on WPF, this app use the MVVM pattern.
+Based on WPF, this app uses the MVVM pattern.
 
-This app load unit and conversion system from json file, for easily add new units in the app.
+This app loads unit and conversion system from json file, in order to add easily new units in the app.
 
 Just add Json file in Datas folder, in Visual Studio don't forget to activate copy in the output folder in the property of file.
 
-The app deserialize the file, add the name of json file in the menu of application.
+The app deserializes the file and adds the name of json file in the menu of application.
 
 # Json File
 
@@ -40,10 +40,10 @@ Is a list of object in json format
 ]
 ```
 For temperature, we have 3 units, the Celsius is the unit base. 
-'BaseUnit' is need to set at true for reference unit 
+'BaseUnit' is needed to set at true for reference unit 
 'Name' is the name of unit
 'Sign' is the sign of unit
-'Ratio' is the current ratio between base unit and current unit, for exemple if Base Unit is Kilogram, the ratio for gram is 1000
+'Ratio' is the current ratio between base unit and current unit, for exemple if base unit is Kilogram, the ratio for gram is 1000
 'Add' is for unit base on difference, like Kelvin (Not mandatory)
 
 # To do 
