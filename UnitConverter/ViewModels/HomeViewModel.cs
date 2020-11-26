@@ -23,6 +23,15 @@ namespace UnitConverter.ViewModels
             set { SetProperty(ref unitByDomain, value); }
         }
 
+        private string selectedUnitType;
+
+        public string SelectedUnitType
+        {
+            get { return selectedUnitType; }
+            set { SetProperty(ref selectedUnitType, value); }
+        }
+
+
         private List<Unit> selectedUnitList;
 
         public List<Unit> SelectedUnitList
@@ -54,7 +63,7 @@ namespace UnitConverter.ViewModels
             }
         }
 
-        public List<string> MenuItems { get; set; }
+        public List<MenuItem> MenuItems { get; set; }
 
         public ObservableCollection<ConvertResult> ConvertResults { get; set; }
 
@@ -63,12 +72,12 @@ namespace UnitConverter.ViewModels
         public HomeViewModel()
         {
             MenuSelectedCommand = new Command<string>(ChangeList);
-            MenuItems = new List<string>();
+            MenuItems = new List<MenuItem>();
             ConvertResults = new ObservableCollection<ConvertResult>();
             UnitByDomain = GetUnits();
             if (UnitByDomain?.Count > 0)
             {
-                MenuItems = UnitByDomain.Keys.ToList();
+                MenuItems = UnitByDomain.Keys.Select(k => new MenuItem() { Name = k }).ToList();
                 ChangeList(UnitByDomain.First().Key);
             }
 
@@ -76,6 +85,8 @@ namespace UnitConverter.ViewModels
 
         private void ChangeList(string key)
         {
+            MenuItems.ForEach(m => m.IsSelected = m.Name == key);
+            SelectedUnitType = key;
             SelectedUnitList = UnitByDomain[key];
             FromUnit = SelectedUnitList.FirstOrDefault();
         }
