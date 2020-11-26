@@ -49,3 +49,4 @@ For temperature, we have 3 units, the Celsius is the unit base.
 # To do 
 * Error handling
 * Add other unit
+* Add unit test
