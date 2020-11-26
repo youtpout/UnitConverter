@@ -40,10 +40,15 @@ Is a list of object in json format
 ]
 ```
 For temperature, we have 3 units, the Celsius is the unit base. 
+
 'BaseUnit' is needed to set at true for reference unit 
+
 'Name' is the name of unit
+
 'Sign' is the sign of unit
+
 'Ratio' is the current ratio between base unit and current unit, for exemple if base unit is Kilogram, the ratio for gram is 1000
+
 'Add' is for unit base on difference, like Kelvin (Not mandatory)
 
 # To do 
