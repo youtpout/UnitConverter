@@ -131,9 +131,9 @@ namespace UnitConverter.ViewModels
         }
 
         /// <summary>
-        /// Deserialize json file for get convert unit and data
+        /// Deserialize json file to get convert unit and data
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of Unit group by Unit type</returns>
         private Dictionary<string, List<Unit>> GetUnits()
         {
             Dictionary<string, List<Unit>> result = new Dictionary<string, List<Unit>>();
@@ -149,7 +149,7 @@ namespace UnitConverter.ViewModels
                     {
                         try
                         {
-                            var text = File.ReadAllText(item, Encoding.Latin1);
+                            var text = File.ReadAllText(item, Encoding.UTF8);
                             List<Unit> units = JsonConvert.DeserializeObject<List<Unit>>(text);
                             if (units?.Count > 0)
                             {
