@@ -43,18 +43,6 @@ namespace UnitConverter.ViewModels
             }
         }
 
-
-        private Unit toUnit;
-        public Unit ToUnit
-        {
-            get { return toUnit; }
-            set
-            {
-                SetProperty(ref toUnit, value);
-                Convert();
-            }
-        }
-
         private decimal fromValue;
         public decimal FromValue
         {
@@ -66,14 +54,9 @@ namespace UnitConverter.ViewModels
             }
         }
 
-        private decimal toValue;
-        public decimal ToValue
-        {
-            get { return toValue; }
-            set { SetProperty(ref toValue, value); }
-        }
-
         public List<string> MenuItems { get; set; }
+
+        public ObservableCollection<ConvertResult> ConvertResults { get; set; }
 
         public Command<string> MenuSelectedCommand { get; set; }
 
@@ -81,6 +64,7 @@ namespace UnitConverter.ViewModels
         {
             MenuSelectedCommand = new Command<string>(ChangeList);
             MenuItems = new List<string>();
+            ConvertResults = new ObservableCollection<ConvertResult>();
             UnitByDomain = GetUnits();
             if (UnitByDomain?.Count > 0)
             {
@@ -94,31 +78,41 @@ namespace UnitConverter.ViewModels
         {
             SelectedUnitList = UnitByDomain[key];
             FromUnit = SelectedUnitList.FirstOrDefault();
-            ToUnit = SelectedUnitList.FirstOrDefault();
         }
 
-
+        /// <summary>
+        /// Convert from unit to all other unit
+        /// </summary>
         private void Convert()
         {
-            if (ToUnit != null && FromUnit != null)
+            ConvertResults.Clear();
+            foreach (var item in SelectedUnitList)
             {
-                if (FromUnit.BaseUnit)
+                var res = new ConvertResult();
+                res.Name = item.ShowName;
+                ConvertResults.Add(res);
+                if (item != null && FromUnit != null)
                 {
-                    ToValue = FromValue * ToUnit.Ratio + ToUnit.Add;
-                }
-                else if (ToUnit.BaseUnit)
-                {
-                    ToValue = (FromValue - FromUnit.Add) * (1 / FromUnit.Ratio);
-                }
-                else if (ToUnit == FromUnit)
-                {
-                    ToValue = FromValue;
-                }
-                else
-                {
-                    ToValue = (FromValue - FromUnit.Add) * (1 / FromUnit.Ratio) * ToUnit.Ratio + ToUnit.Add;
+                    if (FromUnit.BaseUnit)
+                    {
+                        res.Result = FromValue * item.Ratio + item.Add;
+                    }
+                    else if (item.BaseUnit)
+                    {
+                        res.Result = (FromValue - FromUnit.Add) * (1 / FromUnit.Ratio);
+                    }
+                    else if (item == FromUnit)
+                    {
+                        res.Result = FromValue;
+                    }
+                    else
+                    {
+                        res.Result = (FromValue - FromUnit.Add) * (1 / FromUnit.Ratio) * item.Ratio + item.Add;
+                    }
                 }
             }
+
+
         }
 
         private Dictionary<string, List<Unit>> GetUnits()
