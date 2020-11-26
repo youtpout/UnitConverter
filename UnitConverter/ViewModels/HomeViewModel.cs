@@ -83,6 +83,10 @@ namespace UnitConverter.ViewModels
 
         }
 
+        /// <summary>
+        /// For change actual unit screen
+        /// </summary>
+        /// <param name="key">unit choosen</param>
         private void ChangeList(string key)
         {
             MenuItems.ForEach(m => m.IsSelected = m.Name == key);
@@ -126,6 +130,10 @@ namespace UnitConverter.ViewModels
 
         }
 
+        /// <summary>
+        /// Deserialize json file for get convert unit and data
+        /// </summary>
+        /// <returns></returns>
         private Dictionary<string, List<Unit>> GetUnits()
         {
             Dictionary<string, List<Unit>> result = new Dictionary<string, List<Unit>>();

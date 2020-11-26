@@ -14,7 +14,7 @@
   },
   {
     "BaseUnit": false,
-    "Name": "Celsius",
+    "Name": "Fahrenheit",
     "Sign": "°F",
     "Ratio": 1.8,
     "Add": 32
